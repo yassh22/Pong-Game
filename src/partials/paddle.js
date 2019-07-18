@@ -7,7 +7,7 @@ export default class Paddle {
         this.height = height
         this.x = x
         this.y = y
-        this.speed = 12
+        this.speed = 20
         this.score = 0
         this.color = color
         let that = this

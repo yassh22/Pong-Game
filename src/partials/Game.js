@@ -2,6 +2,7 @@ import {SVG_NS, KEYS} from '../settings.js'
 import Board from './Board.js';
 import Paddle from './paddle.js';
 import Ball from './Ball.js'
+import Score from './Score'
 
 export default class Game {
   constructor(element, width, height) {
@@ -15,7 +16,7 @@ export default class Game {
     
     // paddle dimensions
     this.paddleWidth = 8
-    this.paddleHeight = 56
+    this.paddleHeight = 70
     this.boardGap = 10
 
     // Player 1
@@ -43,13 +44,17 @@ export default class Game {
 
     )
 
+    this.score1 = new Score(this.width / 2 - 50, 30, 30)
+    this.score2 = new Score(this.width / 2 + 25, 30, 30)
+
+
     // event listener to pause the game
       document.addEventListener('keydown', event => {
         switch(event.key) {
           case KEYS.spaceBar: 
               this.pause = !this.pause
-              this.player1.speed = 10
-              this.player2.speed = 10    
+              this.player1.speed = 20
+              this.player2.speed = 20    
          }
       })
   }
@@ -70,13 +75,17 @@ export default class Game {
 
     svg.setAttributeNS(null, 'width', this.width)
     svg.setAttributeNS(null, 'height', this.height)
-    svg.setAttributeNS(null, 'viewBox', `0 0 ${this.height} ${this.width}`)
+    svg.setAttributeNS(null, 'viewBox', `0 0 ${this.width} ${this.height}`)
     this.gameElement.appendChild(svg)
 
     this.board.render(svg)
     this.player1.render(svg)
     this.player2.render(svg)
-    this.ball.render(svg)
+    this.ball.render(svg, this.player1, this.player2)
+    this.score1.render(svg, this.player1.score)
+    this.score2.render(svg, this.player2.score)
+
+
 
   }
 }
