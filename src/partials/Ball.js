@@ -20,11 +20,27 @@ export default class Ball {
             this.vx = this.direction * (6 - Math.abs(this.vy))
     }
 
+    wallCollision() {
+        const hitTop = this.y - this.radius <= 0
+        const hitBottom = this.y + this.radius >= this.boardHeight
 
+        const hitLeft = this.x - this.radius <= 0
+        const hitRight = this.x + this.radius >= this.boardWidth
+                
+        if(hitTop || hitBottom) {
+            this.vy = -this.vy
+        }
+
+        if(hitLeft || hitRight) {
+            this.vx = -this.vx
+        }
+    }
 
     render(svg) {
         this.x += this.vx
         this.y += this.vy
+
+        this.wallCollision()
 
         let circle = document.createElementNS(SVG_NS, 'circle')
 
