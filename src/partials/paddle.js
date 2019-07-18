@@ -7,17 +7,18 @@ export default class Paddle {
         this.height = height
         this.x = x
         this.y = y
-        this.speed = 10
+        this.speed = 12
         this.score = 0
         this.color = color
+        let that = this
 
-        document.addEventListener('keydown', event =>{
+        document.addEventListener('keydown', function(event){
             switch(event.key) {
                 case up: 
-                    this.y = Math.max(0, this.y - this.speed)
+                    that.y = Math.max(0, that.y - that.speed)
                 break;
                 case down:
-                    this.y = Math.min(this.boardHeight - this.height, this.y + this.speed)
+                    that.y = Math.min(that.boardHeight - that.height, that.y + that.speed)
                 break
             }
 
