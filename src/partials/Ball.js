@@ -1,5 +1,5 @@
 import {SVG_NS} from '../settings'
-import pingSound from '../../public/sounds/pong-01.wav'
+import pingSound from '../../public/sounds/pong-02.wav'
 export default class Ball {
     constructor(radius, boardWidth, boardHeight) {
         this.radius = radius
@@ -8,7 +8,7 @@ export default class Ball {
         this.direction = 1.3
         this.ping = new Audio(pingSound)
         this.reset()
-    }
+    }  
 
     reset() {
         this.x = this.boardWidth/2
@@ -31,9 +31,13 @@ export default class Ball {
                 && (this.x + this.radius <= rightX)
                 && (this.y >= topY && this.y <= bottomY)
             ) {
-                this.vx = -this.vx;
+                this.vx = -this.vx - 0.5;
                 this.ping.play()
+ 
+           
             }
+
+
         
         }  
             else {
@@ -46,11 +50,13 @@ export default class Ball {
                     && (this.x - this.radius >= leftX)
                     && (this.y >= topY && this.y <= bottomY)
                 ) {
-                    this.vx = -this.vx;
+                    this.vx = -this.vx + 0.5;
                     this.ping.play()
                }
 
             }
+
+
 
     }
     
@@ -69,13 +75,21 @@ export default class Ball {
         if(hitLeft || hitRight) {
             this.vx = -this.vx
         }
+
+
     }
 
     goal(player) {
         player.score++
         this.reset();
-
     }
+
+    endGame(player1, player2) {
+       if (player1.score >= 5 || player2.score >= 5) {
+           this.reset()
+           alert('You see who won right!! ;p')
+       }
+}
 
     render(svg, player1, player2) {
         this.x += this.vx
@@ -83,16 +97,19 @@ export default class Ball {
 
         this.wallCollision()
         this.paddleCollision(player1, player2)
+        this.endGame(player1, player2)
+
+
 
 
         let circle = document.createElementNS(SVG_NS, 'circle')
 
-        circle.setAttributeNS(null, 'fill', 'yellow')
+        circle.setAttributeNS(null, 'fill', 'black')
         circle.setAttributeNS(null, 'cx', this.x)
         circle.setAttributeNS(null, 'cy', this.y)
-        circle.setAttributeNS(null, 'stroke', 'lime')
-        circle.setAttributeNS(null, 'stroke-width', '2')
-        circle.setAttributeNS(null, 'r', '8')
+        circle.setAttributeNS(null, 'stroke', 'red')
+        circle.setAttributeNS(null, 'stroke-width', '3')
+        circle.setAttributeNS(null, 'r', '6')
 
         const rightGoal = this.x + this.radius >= this.boardWidth
         const leftGoal = this.x - this.radius <= 0
@@ -110,3 +127,5 @@ export default class Ball {
         svg.appendChild(circle)
     }
 }
+
+

@@ -8,7 +8,7 @@ export default class Game {
   constructor(element, width, height) {
     this.element = element;
     this.width = width;
-    this.height = height;
+    this.height = height; 
 
     this.gameElement = document.getElementById(this.element)
     this.board = new Board(this.width, this.height)
@@ -21,7 +21,7 @@ export default class Game {
 
     // Player 1
     this.player1 = new Paddle(
-      'magenta',
+      'blue',
       this.height,
       this.paddleWidth,
       this.paddleHeight,
@@ -33,7 +33,7 @@ export default class Game {
 
     // player 2
     this.player2 = new Paddle(
-      'orange',
+      'green',
       this.height,
       this.paddleWidth,
       this.paddleHeight,
@@ -56,18 +56,40 @@ export default class Game {
               this.player1.speed = 20
               this.player2.speed = 20    
          }
-      })
-  }
-  
+      }) 
+      } 
 
-  render() {
+    render() {
     if(this.pause) {
       this.player1.speed = 0
       this.player2.speed = 0
       return
     }
 
+
+    // function to change the board color
+
+
+
+
+    // function to declare winner
+
+      // function winner(score){
+
+      // let a = "5";
+
+      // if(score1.value == a)
+      //     {
+      //         alert("Player 1, You Won!!!");
+      //     }
+      //     else if(score2.value == a){
+      //         alert("Player 2 nailed it!!!");
+      //     }
+      // }
+
+
     // Clear Board
+
     this.gameElement.innerHTML = ''
 
     // create SVG element for the Board

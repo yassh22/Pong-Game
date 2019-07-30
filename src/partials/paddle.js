@@ -7,9 +7,9 @@ export default class Paddle {
         this.height = height
         this.x = x
         this.y = y
-        this.speed = 20
-        this.score = 0
-        this.color = color
+        this.speed = 40
+        this.score = 0 
+        this.color = color 
         let that = this
 
         document.addEventListener('keydown', function(event){
@@ -23,7 +23,23 @@ export default class Paddle {
             }
 
         })
+
     }
+
+    paddleCollision(player1, player2) {
+
+        let a = 5
+
+        if (score1 > a) {
+            that.paddleHeight +=10
+        }
+
+        else if (score2 > a) {
+            that.paddleHeight +=10
+        }
+    }
+
+
 
     coordinates(x, y, width, height) {
         let leftX = x
@@ -33,7 +49,7 @@ export default class Paddle {
         return [leftX, rightX, topY, bottomY]
     }
 
-    render(svg) {
+   render(svg) {
         let rect = document.createElementNS(SVG_NS, 'rect')
 
         rect.setAttributeNS(null, 'fill', this.color)

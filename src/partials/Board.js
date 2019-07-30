@@ -5,17 +5,18 @@ export default class Board {
     constructor(width, height) {
         this.width = width
         this.height = height
-    }
+    }  
+
 
 
 render(svg) {
     let rect = document.createElementNS(SVG_NS, 'rect')
-    rect.setAttributeNS(null, 'fill', 'navy')
+    rect.setAttributeNS(null, 'fill', 'yellow')
     rect.setAttributeNS(null, 'width', this.width)
     rect.setAttributeNS(null, 'height', this.height)
 
     let line = document.createElementNS(SVG_NS, 'line')
-    line.setAttributeNS(null, 'stroke', 'gray')
+    line.setAttributeNS(null, 'stroke', 'lime')
     line.setAttributeNS(null, 'stroke-dasharray', '20, 15')
     line.setAttributeNS(null, 'stroke-width', '4')
     line.setAttributeNS(null, 'x1', (this.width/2))
